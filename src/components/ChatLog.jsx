@@ -4,17 +4,19 @@ import ChatEntry from './ChatEntry';
 
 const LOCAL_SENDER = 'Vladimir';
 
-const ChatLog = ({ entries }) => {
-
+const ChatLog = ({ entries, onLikeToggle }) => {
     const getChatListJSX = (entries) => {
         return entries.map((entry) => {
             return (
                 <ChatEntry
                     key={entry.id}
+                    id={entry.id}
                     sender={entry.sender}
                     body={entry.body}
                     timeStamp={entry.timeStamp}
                     isLocal={entry.sender === LOCAL_SENDER}
+                    liked={entry.liked}
+                    onLikeToggle={onLikeToggle}
                 />
             );
         });
@@ -34,8 +36,10 @@ ChatLog.propTypes = {
             sender: PropTypes.string.isRequired,
             body: PropTypes.string.isRequired,
             timeStamp: PropTypes.string.isRequired,
+            liked: PropTypes.bool.isRequired,
         })
     ).isRequired,
+    onLikeToggle: PropTypes.func.isRequired,
 };
 
 export default ChatLog;
